@@ -13,6 +13,7 @@ import Corporate from './pages/Corporate';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import Careers from './pages/Careers';
+import Success from './pages/Success';
 
 const LandingPage = () => (
   <>
@@ -63,6 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/success" element={<Success />} />
           </Routes>
         </main>
 
