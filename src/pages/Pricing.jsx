@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, X, CreditCard, Smartphone, ShieldCheck } from 'lucide-react';
+import { Check, X, CreditCard, Smartphone, ShieldCheck, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -17,60 +17,70 @@ export default function Pricing() {
   const [isEnterpriseModalOpen, setIsEnterpriseModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
-  // To'lov jarayoni uchun statelar
+  // To'lov jarayoni va CRM uchun statelar
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('stripe'); // 'uzumpay' yoki 'stripe'
   const [clientSecret, setClientSecret] = useState("");
   const [isFetchingIntent, setIsFetchingIntent] = useState(false);
 
+  // CRM qo'shishni boshqaruvchi state
+  const [withCrm, setWithCrm] = useState(false);
+
+  // Dinamik tariflar ro'yxati (withCrm state'iga qarab o'zgaradi)
   const tiers = [
     {
-      name: 'Basic',
+      name: 'BASIC',
       id: 'tier-basic',
       description: 'Kichik jamoalar va loyihalarni boshlash uchun eng zo\'r tanlov.',
-      oldPrice: '$15',
-      price: '$9',
+      price: '$99',
+      period: '/oy',
       hasPrice: true,
       features: [
-        '5 tagacha xodim',
-        'Asosiy vazifalar taqsimoti',
-        '10 GB bulutli xotira',
-        'Standart xavfsizlik',
-        'Email orqali yordam',
+        '5 ta gadjetni ulash',
+        'Xodimlarning ish vaqtini hisoblash',
+        'Joylashuvni kuzatish',
+        'Mikrofon orqali tinglash',
+        'Elektron pochta orqali yordam',
       ],
-      cta: 'Bepul boshlash',
+      cta: 'Tanlash',
       mostPopular: false,
     },
     {
-      name: 'Pro',
-      id: 'tier-pro',
+      name: 'BUSINESS',
+      id: 'tier-business',
       description: 'O\'sayotgan bizneslar va professional jamoalar uchun to\'liq nazorat.',
-      oldPrice: '$49',
-      price: '$29',
+      price: withCrm ? `$${399 + 39}` : '$399', // CRM tanlansa $39 qo'shiladi
+      period: '/oy',
       hasPrice: true,
       features: [
-        '50 tagacha xodim',
-        'Batafsil hisobotlar va Kanban',
-        '100 GB bulutli xotira',
-        'Zoom va Slack integratsiyasi',
-        '24/7 ustuvor yordam',
+        '35 ta gadjetni ulash',
+        'Xodimlarning ish vaqtini hisoblash',
+        'Joylashuvni kuzatish',
+        'Mikrofon orqali tinglash',
+        'Kvartallik arxiv',
+        '24/7 Telegram yordam',
+        ...(withCrm ? ['MyTeam Plus (CRM tizimi) '] : []), // Agar CRM yoqilgan bo'lsa ro'yxatga qo'shiladi
       ],
-      cta: 'Pro tarifini tanlash',
+      cta: 'Business tarifini tanlash',
       mostPopular: true,
     },
     {
-      name: 'Enterprise',
+      name: 'ENTERPRISE',
       id: 'tier-enterprise',
       description: 'Yirik kompaniyalar uchun cheksiz imkoniyatlar va yuqori xavfsizlik.',
-      hasPrice: false,
+      price: withCrm ? `$${3990 + 348}` : '$3990', // CRM tanlansa $348 qo'shiladi
+      period: '/yil',
+      hasPrice: true,
       features: [
-        'Cheksiz xodimlar',
-        'O\'z brendingiz ostida (White-label)',
-        'Cheksiz xotira hajmi',
-        'Shaxsiy VIP menejer',
-        'SSO va korporativ himoya',
+        '50 ta gadjetni ulash',
+        'Xodimlarning ish vaqtini hisoblash',
+        'Joylashuvni kuzatish',
+        'Mikrofon orqali tinglash',
+        'Cheksiz arxiv va barcha funksiyalar',
+        'Shaxsiy menejer va yordam',
+        ...(withCrm ? ['MyTeam Plus (CRM tizimi) '] : []), // Agar CRM yoqilgan bo'lsa ro'yxatga qo'shiladi
       ],
-      cta: 'Biz bilan bog\'lanish',
+      cta: 'Sotib olish',
       mostPopular: false,
     },
   ];
@@ -81,7 +91,7 @@ export default function Pricing() {
       setIsEnterpriseModalOpen(true);
     } else {
       setSelectedPlan(tier);
-      setClientSecret(""); // Yangi modal ochilganda eski to'lov ma'lumotlarini tozalaymiz
+      setClientSecret("");
       setIsPaymentModalOpen(true);
     }
   };
@@ -92,38 +102,35 @@ export default function Pricing() {
 
     try {
       if (paymentMethod === 'stripe') {
-        // --- STRIPE MANTIG'I ---
         const response = await fetch("http://localhost:4242/create-payment-intent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ plan_id: selectedPlan.id }),
+          // Backend'ga tanlangan ta'rifni va CRM bor/yo'qligini yuboramiz
+          body: JSON.stringify({ plan_id: selectedPlan.id, with_crm: withCrm }),
         });
 
         const data = await response.json();
         if (data.clientSecret) {
-          setClientSecret(data.clientSecret); // Modal ichida Stripe formasini ochadi
+          setClientSecret(data.clientSecret);
         } else {
           console.error("Xatolik:", data.error);
         }
 
       } else if (paymentMethod === 'uzumpay') {
-        // --- UZUM PAY MANTIG'I ---
         const response = await fetch("http://localhost:4242/create-uzumpay-url", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ plan_id: selectedPlan.id }),
+          body: JSON.stringify({ plan_id: selectedPlan.id, with_crm: withCrm }),
         });
 
         const data = await response.json();
 
         if (data.url) {
-          // Mijozni to'g'ridan-to'g'ri Uzum Pay to'lov sahifasiga yo'naltiramiz
           window.location.href = data.url;
         } else {
           console.error("Xatolik:", data.error);
         }
       }
-
     } catch (error) {
       console.error("Backend bilan bog'lanishda xatolik:", error);
     }
@@ -138,18 +145,41 @@ export default function Pricing() {
         {/* Sarlavha */}
         <div className="mx-auto max-w-4xl text-center" data-aos="fade-up">
           <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400 uppercase tracking-wide">
-            {t('nav.pricing') || 'Narxlar'}
+            MYTEAM APP
           </h2>
-          <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl transition-colors">
-            Sizning biznesingizga mos tariflar
-          </p>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-slate-600 dark:text-slate-400 transition-colors">
-            Hozirgi aksiyamizdan foydalanib qoling! Barcha tariflarda 14 kunlik bepul sinov muddati mavjud.
+          <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl transition-colors uppercase">
+            O'zingiz uchun ideal tarifni tanlang
           </p>
         </div>
 
+        {/* CRM QO'SHISH TOGGLE (Kaliti) */}
+        <div className="mt-10 flex justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="100">
+          <span className={`text-base font-medium transition-colors ${!withCrm ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}>
+            Standart xizmatlar
+          </span>
+          <button
+            type="button"
+            className={`relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 dark:focus:ring-offset-slate-900 ${
+              withCrm ? 'bg-blue-600' : 'bg-slate-200 dark:bg-slate-700'
+            }`}
+            onClick={() => setWithCrm(!withCrm)}
+          >
+            <span
+              className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${
+                withCrm ? 'translate-x-7' : 'translate-x-0'
+              }`}
+            />
+          </button>
+          <span className={`text-base font-medium flex items-center gap-2 transition-colors ${withCrm ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-500 dark:text-slate-400'}`}>
+            MyTeam Plus (CRM)
+            <span className="text-[10px] uppercase font-bold bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 px-2 py-1 rounded-full flex items-center gap-1">
+              <Plus size={12} />
+            </span>
+          </span>
+        </div>
+
         {/* Jadvallar Gridi */}
-        <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:gap-x-12">
+        <div className="isolate mx-auto mt-12 grid max-w-md grid-cols-1 gap-y-8 sm:mt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:gap-x-12">
           {tiers.map((tier, index) => (
             <div
               key={tier.id}
@@ -173,20 +203,13 @@ export default function Pricing() {
                   )}
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400 h-12 transition-colors">
-                  {tier.description}
-                </p>
-
                 <div className="mt-6 flex items-baseline gap-x-2 h-[48px]">
                   {tier.hasPrice ? (
                     <>
-                      <span className="text-2xl font-bold text-slate-400 dark:text-slate-500 line-through decoration-red-500 decoration-2 transition-colors">
-                        {tier.oldPrice}
-                      </span>
                       <span className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white transition-colors">
                         {tier.price}
                       </span>
-                      <span className="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400 transition-colors">/oy</span>
+                      <span className="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400 transition-colors">{tier.period}</span>
                     </>
                   ) : (
                     <span className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center h-full transition-colors">
@@ -197,8 +220,8 @@ export default function Pricing() {
 
                 <ul role="list" className="mt-8 space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400 transition-colors">
                   {tier.features.map((feature) => (
-                    <li key={feature} className="flex gap-x-3">
-                      <Check className={`h-6 w-5 flex-none transition-colors ${tier.mostPopular ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400'}`} />
+                    <li key={feature} className={`flex gap-x-3 ${feature.includes('MyTeam Plus') ? 'font-bold text-slate-900 dark:text-white bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg -mx-2' : ''}`}>
+                      <Check className={`h-6 w-5 flex-none transition-colors ${tier.mostPopular || feature.includes('MyTeam Plus') ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400'}`} />
                       {feature}
                     </li>
                   ))}
@@ -218,10 +241,17 @@ export default function Pricing() {
             </div>
           ))}
         </div>
+
+        {/* Ilova haqidagi muhim qoidalar / Eskatmalar */}
+        <div className="mx-auto mt-12 max-w-4xl text-sm leading-6 text-slate-500 dark:text-slate-400 space-y-2 px-4 sm:px-0">
+          <p>• Ko'rsatilgan tariflar to'lov kunidagi Markaziy bankning dollarga nisbatan kursi bo'yicha hisoblanadi.</p>
+          <p>• Siz sotib olayotgan tarifga QQS alohida hisoblanadi va uning narxiga qo'shiladi.</p>
+        </div>
+
       </div>
 
       {/* ========================================================= */}
-      {/* MODAL 1: ENTERPRISE (Bog'lanish formasi)                  */}
+      {/* MODAL 1: ENTERPRISE (Bog'lanish formasi - Ehtiyot shart) */}
       {/* ========================================================= */}
       {isEnterpriseModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
@@ -258,7 +288,7 @@ export default function Pricing() {
             <div className="bg-slate-50 dark:bg-slate-900/80 p-6 sm:p-8 border-b border-slate-100 dark:border-slate-700">
               <span className="text-blue-600 dark:text-blue-400 font-bold tracking-wider text-sm uppercase mb-1 block">Xavfsiz To'lov</span>
               <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                {selectedPlan.name} ta'rifini faollashtirish
+                {selectedPlan.name} ta'rifini faollashtirish {withCrm && '(CRM bilan)'}
               </h3>
               <p className="text-slate-500 dark:text-slate-400 flex items-center gap-2">
                 <ShieldCheck size={18} className="text-green-500" /> Shifrlangan xavfsiz ulanish (SSL)
@@ -331,7 +361,7 @@ export default function Pricing() {
                   <div>
                     <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">To'lanadigan summa:</p>
                     <p className="text-3xl font-extrabold text-slate-900 dark:text-white">
-                      {selectedPlan.price} <span className="text-base font-medium text-slate-500">/oy</span>
+                      {selectedPlan.price} <span className="text-base font-medium text-slate-500">{selectedPlan.period}</span>
                     </p>
                   </div>
                   <button
