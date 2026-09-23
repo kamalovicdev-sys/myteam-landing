@@ -66,8 +66,8 @@ export default function Corporate() {
           </p>
           <div className="mt-10" data-aos="fade-up" data-aos-delay="200">
             <a
-              href="/Mehrzod Business Group.pptx"
-              download="Mehrzod Business Group.pptx"
+              href="/mehrzod_business_group.pptx"
+              download="mehrzod_business_group.pptx"
               className="bg-white text-slate-900 px-8 py-4 rounded-lg font-bold hover:bg-slate-100 transition-colors inline-flex items-center shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               {t('corporate.download_btn')}

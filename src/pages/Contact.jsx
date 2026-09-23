@@ -15,7 +15,7 @@ export default function Contact() {
     const formData = new FormData(e.target);
 
     // DIQQAT: O'zingizning Web3Forms Access Key'ingizni shu yerga qo'ying
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    formData.append("access_key", "9201b830-c641-4d2e-a1d6-3d5dffcc82b6");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
