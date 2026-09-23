@@ -26,29 +26,31 @@ export default function Contact() {
               <div>
                 <h3 className="text-2xl font-bold mb-6">Aloqa ma'lumotlari</h3>
                 <p className="text-blue-100 mb-10 leading-relaxed max-w-sm">
-                  Dushanba - Juma, 09:00 dan 18:00 gacha. Jamoamiz sizga yordam berishdan xursand.
+                  Dushanba - Shanba <br/>
+                  09:00 - 18:00
                 </p>
+
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
                     <Phone className="w-6 h-6 text-blue-200 mt-1" />
                     <div>
-                      <p className="font-semibold text-lg">+998 90 123 45 67</p>
+                      <p className="font-semibold text-lg">+998 95 520 95 95</p>
                       <p className="text-blue-200 text-sm">Savdo bo'limi</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <Mail className="w-6 h-6 text-blue-200 mt-1" />
                     <div>
-                      <p className="font-semibold text-lg">enterprise@myteam.uz</p>
+                      <p className="font-semibold text-lg">mehrzodgroup@gmail.com</p>
                       <p className="text-blue-200 text-sm">Korporativ hamkorlik uchun</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <MapPin className="w-6 h-6 text-blue-200 mt-1" />
                     <div>
-                      <p className="font-semibold text-lg">Toshkent shahri, IT Park binosi</p>
-                      <p className="text-blue-200 text-sm">4-qavat, MyTeam offisi</p>
+                      <p className="font-semibold text-lg">Toshkent shahri, Shota Rustaveli, 150</p>
+                      <p className="text-blue-200 text-sm">Vega Center</p>
                     </div>
                   </div>
                 </div>
@@ -68,7 +70,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">Ismingiz</label>
-                    <input type="text" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="Ali Valiyev" />
+                    <input type="text" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="Ism" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">Telefon raqamingiz</label>
@@ -78,7 +80,7 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Elektron pochta</label>
-                  <input type="email" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="ali@example.com" />
+                  <input type="email" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="example@mail.ru" />
                 </div>
 
                 <div>
@@ -99,11 +101,9 @@ export default function Contact() {
             className="w-full h-[400px] border-t border-slate-100 transition-all duration-500 ease-in-out grayscale hover:grayscale-0 overflow-hidden"
             title="Sichqonchani ustiga olib boring"
           >
-            {/* Eslatma: Bu yerda Yandex Maps constructor kodini ishlatamiz.
-               Siz bergan manzil (https://yandex.uz/maps/-/CPuBbBnI) bo'yicha IT Park Toshkent koordinatalari olindi.
-            */}
+
             <iframe
-                src="https://yandex.ru/map-widget/v1/?ll=69.340330%2C41.334181&z=16&l=map&pt=69.340330%2C41.334181%2Cpm2blm"
+                src="https://yandex.uz/map-widget/v1/?ll=69.223798%2C41.260000&mode=search&oid=31783623391&ol=biz&z=17.09"
                 width="100%"
                 height="100%"
                 frameBorder="0"

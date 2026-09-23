@@ -1,36 +1,36 @@
-import { Activity, CheckSquare, BarChart3, Users, Shield, Zap } from 'lucide-react';
+import { Mic, MapPin, Clock, Truck, BarChart3, Shield } from 'lucide-react';
 
 export default function About() {
   const features = [
     {
-      name: 'Xodimlarni kuzatish',
-      description: "Ish vaqtini avtomatik hisoblash va xodimlarning qaysi vazifa ustida ishlayotganini real vaqt rejimida ko'rib turish imkoniyati.",
-      icon: Activity,
+      name: 'Xodimlar qurilmasini tinglash',
+      description: "Administratorlar masofadan turib qurilma mikrofonini yoqishi va xodimning mijoz bilan qanday muloqot qilayotganini real vaqtda kuzatishi yoki yozib olishi mumkin.",
+      icon: Mic,
     },
     {
-      name: 'Vazifalar taqsimoti',
-      description: 'Loyihalarni qismlarga ajrating, mas\'ullarni belgilang va dedlaynlarni Kanban doskalari yordamida oson boshqaring.',
-      icon: CheckSquare,
+      name: 'Xodimlar joylashuvini kuzatish',
+      description: "GPS orqali xodimlarning aniq joylashuvini nazorat qiling. Internet uzilganda ham ma'lumotlar qurilmada saqlanadi va aloqa tiklanganda markazga yuboriladi.",
+      icon: MapPin,
     },
     {
-      name: 'Batafsil hisobotlar',
-      description: 'Jamoa unumdorligi, sarflangan vaqt va loyiha xarajatlari bo\'yicha avtomatlashtirilgan, tushunarli grafiklar.',
+      name: 'Xodimlar ish vaqtini hisoblash',
+      description: "Tizimga kirish va chiqish vaqtlarini soniyasigacha aniq hisoblang. Kechikishlarni oldini oling va faqat haqiqatda ishlangan soatlar uchun pul to'lang.",
+      icon: Clock,
+    },
+    {
+      name: 'Distribyutsion CRM',
+      description: "Savdo agentlari, yetkazib beruvchilar va haridorlar o'rtasidagi barcha savdo va taqsimot jarayonlarini yagona avtomatlashtirilgan platformada boshqaring.",
+      icon: Truck,
+    },
+    {
+      name: 'Analitik tahlillar',
+      description: "Tashriflar, ishlangan soatlar va bosib o'tilgan masofa bo'yicha real vaqt rejimida avtomatlashtirilgan hisobotlarni oling. HR va boshqaruv ishini osonlashtiring.",
       icon: BarChart3,
     },
     {
-      name: 'Jamoaviy hamkorlik',
-      description: 'Ichki chat, fayllar almashinuvi va muhokamalar — barchasi yagona xavfsiz muhitda.',
-      icon: Users,
-    },
-    {
-      name: 'Ma\'lumotlar xavfsizligi',
-      description: 'Barcha ma\'lumotlaringiz shifrlangan va xavfsiz serverlarda saqlanadi. Kim nimani ko\'rishini o\'zingiz hal qilasiz.',
+      name: "Ma'lumotlar xavfsizligi",
+      description: "Barcha ma'lumotlar harbiy darajadagi shifrlash va WAF kiber-qorovul tizimi yordamida himoyalangan. Tizim DdoS va xakerlik hujumlariga bardoshli.",
       icon: Shield,
-    },
-    {
-      name: 'Tezkor ishlash',
-      description: 'Platforma har qanday qurilmada — kompyuter, planshet va smartfonda birdek tez va qotmasdan ishlaydi.',
-      icon: Zap,
     },
   ];
 
@@ -44,13 +44,13 @@ export default function About() {
           className="mx-auto max-w-2xl lg:text-center"
         >
           <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400 uppercase tracking-wide transition-colors duration-300">
-            Loyiha haqida
+            Mijozlar muammolariga yechimlar
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl transition-colors duration-300">
-            Ish jarayonini to'liq nazorat qiling
+            Biznesingizdagi bo'shliqlarni IT bilan to'ldiramiz
           </p>
           <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300 transition-colors duration-300">
-            MyTeam — bu shunchaki boshqaruv tizimi emas, balki biznesingizni o'stirish, xodimlar salohiyatini to'g'ri yo'naltirish va qog'ozbozlikdan qutulish uchun eng zamonaviy yechimdir.
+            Kompaniyangizdagi nazoratsizlik, hisobotlardagi noaniqliklar va ortiqcha xarajatlar kabi asosiy muammolarni aynan sizning biznesingizga moslashgan raqamli yechimlar orqali bartaraf etamiz.
           </p>
         </div>
 

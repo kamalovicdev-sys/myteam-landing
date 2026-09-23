@@ -36,10 +36,15 @@ export default function Corporate() {
             MyTeam Enterprise — yirik korporatsiyalar, davlat tashkilotlari va 500+ xodimga ega kompaniyalar uchun moslashtirilgan maxsus boshqaruv tizimi.
           </p>
           <div className="mt-10">
-            <button className="bg-white text-slate-900 px-8 py-4 rounded-lg font-bold hover:bg-slate-100 transition-colors inline-flex items-center">
-              Savdo bo'limi bilan bog'lanish
+            {/* Tugma o'rniga faylni yuklab oluvchi a tegi qo'yildi */}
+            <a
+              href="/Mehrzod Business Group.pptx"
+              download="Mehrzod Business Group.pptx"
+              className="bg-white text-slate-900 px-8 py-4 rounded-lg font-bold hover:bg-slate-100 transition-colors inline-flex items-center"
+            >
+              Prezentatsiyani yuklab oling
               <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            </a>
           </div>
         </div>
       </section>
