@@ -7,21 +7,21 @@ export default function Team() {
   const teamMembers = [
     {
       name: 'Shuxrat Zaxidov',
-      role: 'Asoschi (CEO)',
+      role: t('team.members.shuxrat.role'),
       image: '/team.jpg',
-      bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      bio: t('team.members.shuxrat.bio'),
     },
     {
       name: 'Po\'lat Xudayberdiyevich',
-      role: 'Oliy toifali huquqshunos',
+      role: t('team.members.pulat.role'),
       image: '/team2.png',
-      bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      bio: t('team.members.pulat.bio'),
     },
     {
       name: 'Mavlonxon Mamadaliev',
-      role: 'Software Engineer | Data Analytics',
+      role: t('team.members.mavlonxon.role'),
       image: '/team3.jpg',
-      bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  ",
+      bio: t('team.members.mavlonxon.bio'),
     }
   ];
 
@@ -32,13 +32,13 @@ export default function Team() {
         {/* Sarlavha qismi */}
         <div className="mx-auto max-w-2xl text-center mb-16" data-aos="fade-up">
           <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400 uppercase tracking-wide transition-colors">
-            {t('nav.team') || 'Bizning Jamoa'}
+            {t('nav.team')}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl transition-colors">
-            Loyihamiz ortidagi mutaxassislar
+            {t('team.title')}
           </p>
           <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400 transition-colors">
-            MyTeam platformasi ortida o'z ishining ustasi bo'lgan, doimo izlanishdagi va mijozlar muvaffaqiyatiga qiziqadigan kuchli kadrlar turibdi.
+            {t('team.desc')}
           </p>
         </div>
 
@@ -52,16 +52,11 @@ export default function Team() {
               className="group bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700/60 overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-900/20 transition-all duration-300 flex flex-col"
             >
 
-              {/* RASM QISMI (Ideal moslashtirilgan) */}
-              {/* Konteyner qat'iy balandlikka ega, rasm esa uning ichida to'liq ko'rinadi */}
+              {/* RASM QISMI */}
               <div className="relative w-full h-[380px] bg-slate-100 dark:bg-slate-700/50 overflow-hidden border-b border-slate-100 dark:border-slate-700/60">
                 <img
                   src={person.image}
                   alt={person.name}
-                  /* object-top o'rniga object-[center_-30px] yozdik.
-                    Agar rasm yana tepaga chiqishi kerak bo'lsa -40px, -50px qilib o'zgartirishingiz mumkin.
-                    Tushirish kerak bo'lsa -10px, -20px qilasiz.
-                  */
                   className="w-full h-full object-cover object-[center_-1px] grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 z-10 relative"
                 />
 

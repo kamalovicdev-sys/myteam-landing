@@ -1,35 +1,38 @@
 import { Mic, MapPin, Clock, Truck, BarChart3, Shield } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function About() {
+  const { t } = useTranslation();
+
   const features = [
     {
-      name: 'Xodimlar qurilmasini tinglash',
-      description: "Administratorlar masofadan turib qurilma mikrofonini yoqishi va xodimning mijoz bilan qanday muloqot qilayotganini real vaqtda kuzatishi yoki yozib olishi mumkin.",
+      name: t('about.features.listen.title'),
+      description: t('about.features.listen.desc'),
       icon: Mic,
     },
     {
-      name: 'Xodimlar joylashuvini kuzatish',
-      description: "GPS orqali xodimlarning aniq joylashuvini nazorat qiling. Internet uzilganda ham ma'lumotlar qurilmada saqlanadi va aloqa tiklanganda markazga yuboriladi.",
+      name: t('about.features.gps.title'),
+      description: t('about.features.gps.desc'),
       icon: MapPin,
     },
     {
-      name: 'Xodimlar ish vaqtini hisoblash',
-      description: "Tizimga kirish va chiqish vaqtlarini soniyasigacha aniq hisoblang. Kechikishlarni oldini oling va faqat haqiqatda ishlangan soatlar uchun pul to'lang.",
+      name: t('about.features.time.title'),
+      description: t('about.features.time.desc'),
       icon: Clock,
     },
     {
-      name: 'Distribyutsion CRM',
-      description: "Savdo agentlari, yetkazib beruvchilar va haridorlar o'rtasidagi barcha savdo va taqsimot jarayonlarini yagona avtomatlashtirilgan platformada boshqaring.",
+      name: t('about.features.crm.title'),
+      description: t('about.features.crm.desc'),
       icon: Truck,
     },
     {
-      name: 'Analitik tahlillar',
-      description: "Tashriflar, ishlangan soatlar va bosib o'tilgan masofa bo'yicha real vaqt rejimida avtomatlashtirilgan hisobotlarni oling. HR va boshqaruv ishini osonlashtiring.",
+      name: t('about.features.analytics.title'),
+      description: t('about.features.analytics.desc'),
       icon: BarChart3,
     },
     {
-      name: "Ma'lumotlar xavfsizligi",
-      description: "Barcha ma'lumotlar harbiy darajadagi shifrlash va WAF kiber-qorovul tizimi yordamida himoyalangan. Tizim DdoS va xakerlik hujumlariga bardoshli.",
+      name: t('about.features.security.title'),
+      description: t('about.features.security.desc'),
       icon: Shield,
     },
   ];
@@ -44,13 +47,13 @@ export default function About() {
           className="mx-auto max-w-2xl lg:text-center"
         >
           <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400 uppercase tracking-wide transition-colors duration-300">
-            Mijozlar muammolariga yechimlar
+            {t('about.subtitle')}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl transition-colors duration-300">
-            Biznesingizdagi bo'shliqlarni IT bilan to'ldiramiz
+            {t('about.title')}
           </p>
           <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300 transition-colors duration-300">
-            Kompaniyangizdagi nazoratsizlik, hisobotlardagi noaniqliklar va ortiqcha xarajatlar kabi asosiy muammolarni aynan sizning biznesingizga moslashgan raqamli yechimlar orqali bartaraf etamiz.
+            {t('about.desc')}
           </p>
         </div>
 
@@ -61,7 +64,7 @@ export default function About() {
               <div
                 key={feature.name}
                 data-aos="fade-up"
-                data-aos-delay={index * 100} // Har biri ketma-ket chiqadi
+                data-aos-delay={index * 100}
                 className="flex flex-col bg-slate-50 dark:bg-slate-800/50 p-8 rounded-2xl hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all duration-300 border border-slate-100 dark:border-slate-700/50 hover:-translate-y-2 group"
               >
                 <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900 dark:text-white transition-colors duration-300">

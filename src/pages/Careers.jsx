@@ -1,26 +1,51 @@
-import { MapPin, Clock, ArrowRight, Code, Terminal } from 'lucide-react';
+import { MapPin, Clock, ArrowRight, Code, Terminal, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Careers() {
+  const { t } = useTranslation();
+
   const jobs = [
     {
       id: 1,
-      title: 'Software Engineer',
-      department: 'Muhandislik',
-      type: "To'liq stavka",
-      location: 'Toshkent / Masofaviy',
+      title: t('careers.jobs.software.title'),
+      department: t('careers.jobs.software.department'),
+      type: t('careers.jobs.software.type'),
+      location: t('careers.jobs.software.loc'),
       icon: Code,
-      description: "Bizning asosiy platformamizni rivojlantirish uchun tajribali React va Node.js dasturchisini qidiryapmiz.",
-      requirements: ['React va Node.js', '3+ yillik tajriba', 'Muammolarni mustaqil hal qila olish']
+      description: t('careers.jobs.software.desc'),
+      requirements: [
+        t('careers.jobs.software.req1'),
+        t('careers.jobs.software.req2'),
+        t('careers.jobs.software.req3')
+      ]
     },
     {
       id: 2,
-      title: 'DevOps Engineer',
-      department: 'Infratuzilma',
-      type: "To'liq stavka",
-      location: 'Toshkent, IT Park',
+      title: t('careers.jobs.devops.title'),
+      department: t('careers.jobs.devops.department'),
+      type: t('careers.jobs.devops.type'),
+      location: t('careers.jobs.devops.loc'),
       icon: Terminal,
-      description: "Bulutli infratuzilmamiz (AWS/Docker/Kubernetes) barqarorligi va xavfsizligini ta'minlash uchun mutaxassis kerak.",
-      requirements: ['AWS / CI/CD', 'Docker & Kubernetes', 'Linux ma\'muriyati']
+      description: t('careers.jobs.devops.desc'),
+      requirements: [
+        t('careers.jobs.devops.req1'),
+        t('careers.jobs.devops.req2'),
+        t('careers.jobs.devops.req3')
+      ]
+    },
+    {
+      id: 3,
+      title: t('careers.jobs.sales.title'),
+      department: t('careers.jobs.sales.department'),
+      type: t('careers.jobs.sales.type'),
+      location: t('careers.jobs.sales.loc'),
+      icon: TrendingUp,
+      description: t('careers.jobs.sales.desc'),
+      requirements: [
+        t('careers.jobs.sales.req1'),
+        t('careers.jobs.sales.req2'),
+        t('careers.jobs.sales.req3')
+      ]
     }
   ];
 
@@ -31,18 +56,18 @@ export default function Careers() {
         {/* Sarlavha qismi */}
         <div className="mx-auto max-w-2xl text-center mb-16" data-aos="fade-up">
           <h2 className="text-base font-semibold leading-7 text-blue-600 uppercase tracking-wide">
-            Karyera
+            {t('careers.subtitle')}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Bizning jamoaga qo'shiling
+            {t('careers.title')}
           </p>
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            MyTeam loyihasini rivojlantirishda o'z hissangizni qo'shing. Biz doimo o'z ishining ustalarini qidiramiz!
+            {t('careers.desc')}
           </p>
         </div>
 
         {/* Bo'sh ish o'rinlari (Cards) */}
-        <div className="mx-auto max-w-5xl grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mx-auto max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {jobs.map((job, index) => (
             <div
               key={job.id}
@@ -64,7 +89,7 @@ export default function Careers() {
                   {job.title}
                 </h3>
 
-                <p className="text-slate-600 mb-6 h-12">
+                <p className="text-slate-600 mb-6 h-16">
                   {job.description}
                 </p>
 
@@ -80,7 +105,7 @@ export default function Careers() {
                 </div>
 
                 <div className="mb-8">
-                  <h4 className="text-sm font-semibold text-slate-900 mb-2">Talablar:</h4>
+                  <h4 className="text-sm font-semibold text-slate-900 mb-2">{t('careers.requirements')}</h4>
                   <ul className="flex flex-wrap gap-2">
                     {job.requirements.map(req => (
                       <li key={req} className="text-xs font-medium text-slate-600 bg-slate-200/50 px-2.5 py-1 rounded-md">
@@ -91,9 +116,13 @@ export default function Careers() {
                 </div>
               </div>
 
-              <button className="w-full flex items-center justify-center gap-2 bg-white border-2 border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white text-slate-700 font-semibold py-3 rounded-xl transition-all duration-300">
-                Topshirish <ArrowRight size={18} />
-              </button>
+              {/* Ishlaydigan Topshirish tugmasi - HR elektron pochtasiga yo'naltiradi */}
+              <a
+                href={`mailto:mehrzodgroup@gmail.com?subject=${encodeURIComponent(job.title)} vakansiyasi bo'yicha`}
+                className="w-full flex items-center justify-center gap-2 bg-white border-2 border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white text-slate-700 font-semibold py-3 rounded-xl transition-all duration-300"
+              >
+                {t('careers.apply_btn')} <ArrowRight size={18} />
+              </a>
             </div>
           ))}
         </div>
