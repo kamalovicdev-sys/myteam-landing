@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Netlify badge ni yashirish */
+#netlify-badge {
+    display: none !important;
+}
+
+/* Agar badge ning ID si boshqacha bo'lsa, ushbu classlardan biri ham yordam berishi mumkin: */
+.netlify-badge {
+    display: none !important;
+}
+
+a[href^="https://www.netlify.com"] {
+    display: none !important;
+}
