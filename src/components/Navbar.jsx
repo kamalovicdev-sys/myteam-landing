@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Users, Sun, Moon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-// Props orqali theme va toggleTheme ni qabul qilamiz
 export default function Navbar({ theme, toggleTheme }) {
   const { t, i18n } = useTranslation();
 
   const toggleLanguage = () => {
-    const nextLang = i18n.language === 'uz' ? 'ru' : 'uz';
+    const nextLang = i18n.language === 'ru' ? 'uz' : 'ru';
     i18n.changeLanguage(nextLang);
   };
-
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -69,8 +67,8 @@ export default function Navbar({ theme, toggleTheme }) {
                 className="p-2 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors cursor-pointer"
               >
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-
               </button>
+
               <button
                 onClick={toggleLanguage}
                 className="font-bold text-sm p-2 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
@@ -82,7 +80,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 onClick={() => setIsModalOpen(true)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
               >
-                Boshlash
+                {t('nav.start')}
               </button>
             </div>
 
@@ -126,7 +124,7 @@ export default function Navbar({ theme, toggleTheme }) {
               onClick={() => { setIsOpen(false); setIsModalOpen(true); }}
               className="mt-4 mx-4 bg-blue-600 hover:bg-blue-700 text-white text-center px-6 py-3.5 rounded-xl font-semibold transition-all shadow-md"
             >
-              Boshlash
+              {t('nav.start')}
             </button>
           </div>
         </div>
@@ -135,28 +133,29 @@ export default function Navbar({ theme, toggleTheme }) {
       {/* Pop-up Formasi */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-opacity">
-          {/* Pop-up foni ham qora mavzuga o'tadi */}
           <div data-aos="zoom-in" className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 sm:p-8 relative">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-full p-1.5 transition-colors">
               <X size={20} />
             </button>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Platformaga qo'shilish</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">14 kunlik bepul sinov muddatini boshlash uchun ma'lumotlaringizni kiriting.</p>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('navbar.modal.title')}</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{t('navbar.modal.desc')}</p>
 
             <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); }}>
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Kompaniya nomi</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('navbar.modal.company')}</label>
                 <input type="text" className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white px-4 py-2.5 focus:ring-2 focus:ring-blue-500" required />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Ism-sharifingiz</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('navbar.modal.fullname')}</label>
                 <input type="text" className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white px-4 py-2.5 focus:ring-2 focus:ring-blue-500" required />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Elektron pochta</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('navbar.modal.email')}</label>
                 <input type="email" className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white px-4 py-2.5 focus:ring-2 focus:ring-blue-500" required />
               </div>
-              <button type="submit" className="w-full mt-4 bg-blue-600 text-white rounded-lg py-3.5 font-semibold hover:bg-blue-700 transition-colors shadow-sm">Hisob yaratish</button>
+              <button type="submit" className="w-full mt-4 bg-blue-600 text-white rounded-lg py-3.5 font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+                {t('navbar.modal.submit')}
+              </button>
             </form>
           </div>
         </div>
