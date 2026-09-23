@@ -1,8 +1,41 @@
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from "react-i18next";
 
 export default function Contact() {
   const { t } = useTranslation();
+
+  // Forma holatini boshqarish uchun statelar
+  const [status, setStatus] = useState(''); // 'loading', 'success', 'error'
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    const formData = new FormData(e.target);
+
+    // DIQQAT: O'zingizning Web3Forms Access Key'ingizni shu yerga qo'ying
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        e.target.reset(); // Formani tozalash
+        setTimeout(() => setStatus(''), 5000); // 5 soniyadan keyin muvaffaqiyat xabarini yashirish
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+  };
 
   return (
     <div className="bg-slate-50 py-24 sm:py-32 min-h-screen">
@@ -18,10 +51,9 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Asosiy konteyner (Forma + Xarita bitta card ichida) */}
+        {/* Asosiy konteyner */}
         <div className="mx-auto max-w-6xl bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col">
 
-          {/* Yuqori qism: Kontakt ma'lumotlari va Forma (Grid) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
 
             {/* Chap tomon: Kontakt ma'lumotlari */}
@@ -32,7 +64,6 @@ export default function Contact() {
                   {t('contact.working_days')} <br/>
                   09:00 - 18:00
                 </p>
-
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
@@ -68,38 +99,82 @@ export default function Contact() {
             </div>
 
             {/* O'ng tomon: Xabar yuborish formasi */}
-            <div className="p-10 lg:p-12">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <div className="p-10 lg:p-12 relative">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t('contact.form.name_label')}</label>
-                    <input type="text" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder={t('contact.form.name_placeholder')} />
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white"
+                      placeholder={t('contact.form.name_placeholder')}
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t('contact.form.phone_label')}</label>
-                    <input type="tel" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="+998 90 000 00 00" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white"
+                      placeholder="+998 90 000 00 00"
+                    />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t('contact.form.email_label')}</label>
-                  <input type="email" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white" placeholder="example@mail.ru" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white"
+                    placeholder="example@mail.ru"
+                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t('contact.form.msg_label')}</label>
-                  <textarea rows="4" className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white resize-none" placeholder={t('contact.form.msg_placeholder')}></textarea>
+                  <textarea
+                    name="message"
+                    required
+                    rows="4"
+                    className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-slate-50 focus:bg-white resize-none"
+                    placeholder={t('contact.form.msg_placeholder')}
+                  ></textarea>
                 </div>
 
-                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md">
-                  <Send size={20} />
-                  {t('contact.form.send_btn')}
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md"
+                >
+                  {status === 'loading' ? (
+                    <><Loader2 size={20} className="animate-spin" /> Yuborilmoqda...</>
+                  ) : (
+                    <><Send size={20} /> {t('contact.form.send_btn')}</>
+                  )}
                 </button>
+
+                {/* Xabar yuborilganligi haqida status */}
+                {status === 'success' && (
+                  <div className="p-4 mt-4 bg-green-50 text-green-700 rounded-lg flex items-center gap-2 border border-green-200">
+                    <CheckCircle2 size={20} />
+                    Xabaringiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="p-4 mt-4 bg-red-50 text-red-700 rounded-lg border border-red-200">
+                    Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki telefon orqali bog'laning.
+                  </div>
+                )}
               </form>
             </div>
           </div>
 
-          {/* Pastki qism: Yandex Map (No Gap) */}
+          {/* Pastki qism: Yandex Map */}
           <div
             className="w-full h-[400px] border-t border-slate-100 transition-all duration-500 ease-in-out grayscale hover:grayscale-0 overflow-hidden"
             title={t('contact.map_hover')}
