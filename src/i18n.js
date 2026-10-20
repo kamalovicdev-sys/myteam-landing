@@ -30,10 +30,17 @@ i18n
     }
   });
 
-document.documentElement.lang = i18n.language;
+// Sahifa tili, sarlavhasi va tavsifi tanlangan tilga mos bo'lsin
+function applyLanguage(lng) {
+  document.documentElement.lang = lng;
+  document.title = i18n.t('meta.title');
+  document.querySelector('meta[name="description"]')?.setAttribute('content', i18n.t('meta.description'));
+}
+
+applyLanguage(i18n.language);
 
 i18n.on('languageChanged', (lng) => {
-  document.documentElement.lang = lng;
+  applyLanguage(lng);
   try {
     localStorage.setItem('lang', lng);
   } catch {

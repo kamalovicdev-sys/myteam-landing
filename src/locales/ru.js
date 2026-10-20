@@ -1,5 +1,10 @@
 // Ruscha matnlar: kalitlar uz.js bilan bir xil bo'lishi kerak
 const ru = {
+  meta: {
+    title: "MyTeam — контроль сотрудников и фарм CRM: GPS, табель, KPI",
+    description: "Рабочее время, живая геолокация, табель и защита от Fake GPS — MyTeam. Визиты, CLM, KPI и бонусы медпредставителей — MyTeam Plus. 14 дней бесплатно.",
+  },
+
   nav: {
     problems: "Проблемы",
     products: "Решения",

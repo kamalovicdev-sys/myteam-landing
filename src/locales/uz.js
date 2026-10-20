@@ -1,5 +1,11 @@
 // O'zbekcha matnlar (asosiy til). Da'volar faqat MyTeam va MyTeam Plus'da qurilgan narsalarga mos bo'lsin.
 const uz = {
+  // Brauzer sarlavhasi va qidiruvdagi tavsif (index.html dagisi bilan bir xil)
+  meta: {
+    title: "MyTeam — xodimlar nazorati va farma CRM: GPS, davomat, KPI",
+    description: "Ish vaqti, jonli joylashuv, davomat va soxta GPS'dan himoya — MyTeam. Tibbiy vakillar uchun vizitlar, CLM, KPI va bonus — MyTeam Plus. 14 kun bepul.",
+  },
+
   nav: {
     problems: "Muammolar",
     products: "Yechimlar",

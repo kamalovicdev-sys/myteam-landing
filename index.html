@@ -3,31 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyTeam — dala xodimlari nazorati va farma CRM</title>
-    <meta name="description" content="MyTeam: ish vaqti, jonli joylashuv, davomat va jonli tinglash. MyTeam Plus: farmatsevtika kompaniyalari uchun CRM — vizitlar, CLM, namunalar, KPI va bonus. 14 kun bepul." />
+
+    <!-- Sarlavha va tavsif o'zbekcha (asosiy til); ruscha tanlansa i18n.js ularni almashtiradi -->
+    <title>MyTeam — xodimlar nazorati va farma CRM: GPS, davomat, KPI</title>
+    <meta name="description" content="Ish vaqti, jonli joylashuv, davomat va soxta GPS'dan himoya — MyTeam. Tibbiy vakillar uchun vizitlar, CLM, KPI va bonus — MyTeam Plus. 14 kun bepul." />
+    <meta name="keywords" content="xodimlar nazorati, GPS kuzatuv, davomat, ish vaqti hisobi, jonli tinglash, KPI, farma CRM, tibbiy vakillar, CLM, контроль сотрудников, GPS трекинг, учет рабочего времени, CRM для фармацевтики" />
+    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="MyTeam" />
+    <link rel="canonical" href="https://my-team.uz/" />
+
     <meta name="theme-color" content="#0a1530" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Havola ulashilganda (Telegram, Facebook, LinkedIn) ko'rinadigan kartochka -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MyTeam" />
     <meta property="og:url" content="https://my-team.uz/" />
     <meta property="og:title" content="MyTeam — xodimlaringiz qayerda va nima qilyapti: taxmin emas, fakt" />
-    <meta property="og:description" content="Dala xodimlari nazorati va farmatsevtika CRM'i. Jonli xarita, davomat, soxta GPS'dan himoya, vizitlar va KPI. 14 kun bepul." />
+    <meta property="og:description" content="Dala xodimlari nazorati va farmatsevtika CRM'i: jonli xarita, davomat, soxta GPS'dan himoya, jonli tinglash, vizitlar va KPI. 14 kun bepul sinov." />
+    <meta property="og:image" content="https://my-team.uz/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MyTeam — xodimlaringiz qayerda va nima qilyapti: taxmin emas, fakt" />
     <meta property="og:locale" content="uz_UZ" />
     <meta property="og:locale:alternate" content="ru_RU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyTeam — xodimlar nazorati va farma CRM" />
+    <meta name="twitter:description" content="Jonli xarita, davomat, soxta GPS'dan himoya, jonli tinglash, vizitlar va KPI. 14 kun bepul." />
+    <meta name="twitter:image" content="https://my-team.uz/og-image.png" />
+
+    <!-- Qidiruv tizimlari uchun: kompaniya va ikki mahsulot. Narxlar src/lib/pricing.js bilan bir xil bo'lsin -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://my-team.uz/#organization",
+            "name": "MyTeam",
+            "url": "https://my-team.uz/",
+            "logo": "https://my-team.uz/apple-touch-icon.png",
+            "email": "mehrzodgroup@gmail.com",
+            "telephone": "+998955209595",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Shota Rustaveli ko'chasi, 150",
+              "addressLocality": "Toshkent",
+              "addressCountry": "UZ"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+998955209595",
+              "contactType": "sales",
+              "availableLanguage": ["uz", "ru"]
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "MyTeam",
+            "url": "https://my-team.uz/#products",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Android, Web",
+            "description": "Xodimlar nazorati: ishni boshlash va yakunlash, jonli xarita va marshrut, avtomatik davomat, ish vaqtida jonli tinglash, ish jadvallari, ta'tillar, KPI va HR ko'rsatkichlari.",
+            "publisher": { "@id": "https://my-team.uz/#organization" },
+            "offers": {
+              "@type": "AggregateOffer",
+              "priceCurrency": "UZS",
+              "lowPrice": "139000",
+              "highPrice": "199000",
+              "description": "Bir xodim uchun oyiga, QQSsiz. 14 kun bepul sinov."
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "MyTeam Plus",
+            "url": "https://my-team.uz/#products",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Android, Web",
+            "description": "Farmatsevtika kompaniyalari uchun CRM: tibbiy vakillar vizitlari, oylik vizit rejasi, CLM taqdimot, shifokor kartasi, namunalar ombori, distribyutor savdosi, KPI va bonus.",
+            "publisher": { "@id": "https://my-team.uz/#organization" },
+            "offers": {
+              "@type": "AggregateOffer",
+              "priceCurrency": "UZS",
+              "lowPrice": "139000",
+              "highPrice": "199000",
+              "description": "Bir tibbiy vakil uchun oyiga, QQSsiz. 14 kun bepul sinov."
+            }
+          }
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Mavzu sahifa chizilishidan oldin qo'yiladi: qorong'i mavzuda oq "chaqnash" bo'lmasin -->
+    <!-- Mavzu va til sahifa chizilishidan oldin qo'yiladi: qorong'i mavzuda oq "chaqnash" bo'lmasin -->
     <script>
       try {
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        if (localStorage.getItem('lang') === 'ru') document.documentElement.lang = 'ru';
       } catch (e) { /* xotira yopiq bo'lishi mumkin */ }
     </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- JavaScript o'chiq bo'lsa ham asosiy ma'lumot va aloqa ko'rinsin -->
+    <noscript>
+      <div style="max-width: 640px; margin: 48px auto; padding: 0 16px; font-family: system-ui, sans-serif; line-height: 1.5; color: #0b1630;">
+        <h1>MyTeam — xodimlar nazorati va farma CRM</h1>
+        <p><b>MyTeam</b>: ishni boshlash va yakunlash, jonli xarita, avtomatik davomat, ish vaqtida jonli tinglash, KPI va HR ko'rsatkichlari.</p>
+        <p><b>MyTeam Plus</b>: farmatsevtika kompaniyalari uchun CRM — vizitlar, CLM taqdimot, namunalar, distribyutor savdosi, KPI va bonus.</p>
+        <p>14 kun bepul sinov. Aloqa: <a href="tel:+998955209595">+998 95 520 95 95</a>, <a href="mailto:mehrzodgroup@gmail.com">mehrzodgroup@gmail.com</a></p>
+        <p>Saytning to'liq ko'rinishi uchun brauzeringizda JavaScript'ni yoqing.</p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
