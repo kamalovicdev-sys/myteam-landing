@@ -1,70 +1,76 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import AOS from 'aos';
+import { useTranslation } from 'react-i18next';
 import 'aos/dist/aos.css';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Team from './pages/Team';
-import Corporate from './pages/Corporate';
-import Pricing from './pages/Pricing';
-import Contact from './pages/Contact';
+import Landing from './pages/Landing';
 import Careers from './pages/Careers';
-import Success from './pages/Success';
 
-const LandingPage = () => (
-  <>
-    <section id="home"><Home /></section>
-    <section id="about" className="scroll-mt-16"><About /></section>
-    <section id="team" className="scroll-mt-16"><Team /></section>
-    <section id="corporate" className="scroll-mt-16"><Corporate /></section>
-    <section id="pricing" className="scroll-mt-16"><Pricing /></section>
-    <section id="contact" className="scroll-mt-16"><Contact /></section>
-  </>
-);
+// Mavzu xotiradan; xotira yopiq bo'lsa ham sahifa ishlayveradi
+function savedTheme() {
+  try {
+    return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+  } catch {
+    return 'light';
+  }
+}
+
+// Sahifa almashganda tepadan boshlash (bo'limga havola bo'lmasa)
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+}
 
 function App() {
-  // 1. Mavzuni xotiradan o'qish yoki standart 'light' qilish
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(savedTheme);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
-    // 2. Theme o'zgarganda <html> tegiga 'dark' klassini qo'shish/olish
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme); // Xotiraga saqlash
-
     AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
+      duration: 750,
+      easing: 'ease-out-cubic',
       once: true,
-      offset: 100,
+      offset: 60,
+      disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     });
+  }, []);
+
+  // Til almashganda matn uzunligi o'zgaradi: animatsiya nuqtalarini qayta hisoblaymiz
+  useEffect(() => {
+    AOS.refresh();
+  }, [i18n.language]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      // xotira yopiq: mavzu faqat shu oynada qoladi
+    }
   }, [theme]);
 
-  // 3. O'zgartirish funksiyasi
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <Router>
-      {/* 4. Asosiy fonga dark:bg-slate-900 va dark:text-slate-100 qo'shdik */}
-      <div className="min-h-screen flex flex-col font-sans transition-colors duration-300 overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
-
-        {/* Navbar'ga theme va toggleTheme funksiyalarini uzatamiz */}
+      <ScrollToTop />
+      <div className="flex min-h-screen flex-col overflow-x-clip bg-page font-sans text-ink">
         <Navbar theme={theme} toggleTheme={toggleTheme} />
 
         <main className="flex-grow pt-16">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/success" element={<Success />} />
+            <Route path="*" element={<Landing />} />
           </Routes>
         </main>
 

@@ -1,132 +1,84 @@
-import { MapPin, Clock, ArrowRight, Code, Terminal, TrendingUp } from 'lucide-react';
+import { MapPin, Clock, ArrowRight, ArrowLeft, Code, Terminal, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SectionHeading } from '../components/ui';
+import { CONTACTS } from '../contacts';
+
+const JOBS = [
+  { id: 'software', icon: Code },
+  { id: 'devops', icon: Terminal },
+  { id: 'sales', icon: TrendingUp },
+];
 
 export default function Careers() {
   const { t } = useTranslation();
 
-  const jobs = [
-    {
-      id: 1,
-      title: t('careers.jobs.software.title'),
-      department: t('careers.jobs.software.department'),
-      type: t('careers.jobs.software.type'),
-      location: t('careers.jobs.software.loc'),
-      icon: Code,
-      description: t('careers.jobs.software.desc'),
-      requirements: [
-        t('careers.jobs.software.req1'),
-        t('careers.jobs.software.req2'),
-        t('careers.jobs.software.req3')
-      ]
-    },
-    {
-      id: 2,
-      title: t('careers.jobs.devops.title'),
-      department: t('careers.jobs.devops.department'),
-      type: t('careers.jobs.devops.type'),
-      location: t('careers.jobs.devops.loc'),
-      icon: Terminal,
-      description: t('careers.jobs.devops.desc'),
-      requirements: [
-        t('careers.jobs.devops.req1'),
-        t('careers.jobs.devops.req2'),
-        t('careers.jobs.devops.req3')
-      ]
-    },
-    {
-      id: 3,
-      title: t('careers.jobs.sales.title'),
-      department: t('careers.jobs.sales.department'),
-      type: t('careers.jobs.sales.type'),
-      location: t('careers.jobs.sales.loc'),
-      icon: TrendingUp,
-      description: t('careers.jobs.sales.desc'),
-      requirements: [
-        t('careers.jobs.sales.req1'),
-        t('careers.jobs.sales.req2'),
-        t('careers.jobs.sales.req3')
-      ]
-    }
-  ];
-
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-page py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="mb-10 inline-flex items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-ink">
+          <ArrowLeft size={16} /> {t('careers.back')}
+        </Link>
 
-        {/* Sarlavha qismi */}
-        <div className="mx-auto max-w-2xl text-center mb-16" data-aos="fade-up">
-          <h2 className="text-base font-semibold leading-7 text-blue-600 uppercase tracking-wide">
-            {t('careers.subtitle')}
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            {t('careers.title')}
-          </p>
-          <p className="mt-4 text-lg leading-8 text-slate-600">
-            {t('careers.desc')}
-          </p>
-        </div>
+        <SectionHeading eyebrow={t('careers.subtitle')} title={t('careers.title')} desc={t('careers.desc')} />
 
-        {/* Bo'sh ish o'rinlari (Cards) */}
-        <div className="mx-auto max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {jobs.map((job, index) => (
-            <div
-              key={job.id}
-              data-aos="fade-up"
-              data-aos-delay={index * 150}
-              className="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 group flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
-                    {job.department}
-                  </span>
-                  <div className="p-2 bg-white rounded-lg text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-colors shadow-sm">
-                    <job.icon size={24} />
-                  </div>
-                </div>
-
-                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  {job.title}
-                </h3>
-
-                <p className="text-slate-600 mb-6 h-16">
-                  {job.description}
-                </p>
-
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <div className="flex items-center text-sm text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
-                    <Clock size={16} className="mr-2 text-slate-400" />
-                    {job.type}
-                  </div>
-                  <div className="flex items-center text-sm text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
-                    <MapPin size={16} className="mr-2 text-slate-400" />
-                    {job.location}
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <h4 className="text-sm font-semibold text-slate-900 mb-2">{t('careers.requirements')}</h4>
-                  <ul className="flex flex-wrap gap-2">
-                    {job.requirements.map(req => (
-                      <li key={req} className="text-xs font-medium text-slate-600 bg-slate-200/50 px-2.5 py-1 rounded-md">
-                        {req}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Ishlaydigan Topshirish tugmasi - HR elektron pochtasiga yo'naltiradi */}
-              <a
-                href={`mailto:mehrzodgroup@gmail.com?subject=${encodeURIComponent(job.title)} vakansiyasi bo'yicha`}
-                className="w-full flex items-center justify-center gap-2 bg-white border-2 border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white text-slate-700 font-semibold py-3 rounded-xl transition-all duration-300"
+        {/* Bo'sh ish o'rinlari */}
+        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {JOBS.map((job, index) => {
+            const { id } = job;
+            const title = t(`careers.jobs.${id}.title`);
+            return (
+              <div
+                key={id}
+                data-aos="fade-up"
+                data-aos-delay={index * 120}
+                className="flex flex-col justify-between rounded-2xl border border-line bg-surface p-7"
               >
-                {t('careers.apply_btn')} <ArrowRight size={18} />
-              </a>
-            </div>
-          ))}
-        </div>
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs font-bold text-accent">
+                      {t(`careers.jobs.${id}.department`)}
+                    </span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy-900 text-amber-400">
+                      <job.icon size={20} />
+                    </span>
+                  </div>
 
+                  <h3 className="mb-3 text-2xl font-extrabold text-ink">{title}</h3>
+                  <p className="mb-6 leading-relaxed text-muted">{t(`careers.jobs.${id}.desc`)}</p>
+
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    <span className="flex items-center rounded-lg border border-line px-3 py-1.5 text-sm text-muted">
+                      <Clock size={15} className="mr-2" /> {t(`careers.jobs.${id}.type`)}
+                    </span>
+                    <span className="flex items-center rounded-lg border border-line px-3 py-1.5 text-sm text-muted">
+                      <MapPin size={15} className="mr-2" /> {t(`careers.jobs.${id}.loc`)}
+                    </span>
+                  </div>
+
+                  <div className="mb-8">
+                    <h4 className="mb-2 text-sm font-bold text-ink">{t('careers.requirements')}</h4>
+                    <ul className="flex flex-wrap gap-2">
+                      {['req1', 'req2', 'req3'].map((req) => (
+                        <li key={req} className="rounded-md bg-sunken px-2.5 py-1 text-xs font-semibold text-muted">
+                          {t(`careers.jobs.${id}.${req}`)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Topshirish tugmasi — HR elektron pochtasiga yo'naltiradi */}
+                <a
+                  href={`mailto:${CONTACTS.email}?subject=${encodeURIComponent(t('careers.apply_subject', { title }))}`}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy-900 py-3 font-bold text-white transition-colors hover:bg-navy-800 dark:bg-navy-700 dark:hover:bg-navy-600"
+                >
+                  {t('careers.apply_btn')} <ArrowRight size={18} />
+                </a>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
