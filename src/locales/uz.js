@@ -202,6 +202,9 @@ const uz = {
     title: "Uch qadam — va jarayon ko'z oldingizda",
     desc: "Xodim planshetda bitta tugmani bosadi, qolganini tizim o'zi bajaradi.",
     step: "{{n}}-qadam",
+    try_title: "{{product}}'ni o'zingiz sinab ko'ring",
+    try_desc: "Kirish sahifasida «Demo ko'rish» tugmasini bosing — telefon va parol kerak emas. Ma'lumotlar namunaviy, faqat ko'rish uchun.",
+    try_cta: "Demo'ga kirish",
     myteam: [
       { title: "Ishni boshlash", desc: "Xodim tugmani bosadi va nima ochilishiga rozilik beradi. Kelgan vaqti va joyi yoziladi." },
       { title: "Ish vaqti", desc: "Joylashuv xaritada jonli ko'rinadi. Rahbar kerak bo'lsa mikrofonni jonli tinglaydi — mikrofon faqat shu paytda yoqiladi." },
