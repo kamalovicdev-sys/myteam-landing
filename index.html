@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="uz">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Sarlavha va tavsif o'zbekcha (asosiy til); ruscha tanlansa i18n.js ularni almashtiradi -->
-    <title>MyTeam — xodimlar nazorati va farma CRM: GPS, davomat, KPI</title>
-    <meta name="description" content="Ish vaqti, jonli joylashuv, davomat va soxta GPS'dan himoya — MyTeam. Tibbiy vakillar uchun vizitlar, CLM, KPI va bonus — MyTeam Plus. 14 kun bepul." />
-    <meta name="keywords" content="xodimlar nazorati, GPS kuzatuv, davomat, ish vaqti hisobi, jonli tinglash, KPI, farma CRM, tibbiy vakillar, CLM, контроль сотрудников, GPS трекинг, учет рабочего времени, CRM для фармацевтики" />
+    <!-- Sarlavha va tavsif ruscha (asosiy til, src/locales/ru.js meta); o'zbekcha tanlansa i18n.js ularni almashtiradi -->
+    <title>MyTeam — контроль сотрудников и фарм CRM: GPS, табель, KPI</title>
+    <meta name="description" content="Рабочее время, живая геолокация, табель и защита от Fake GPS — MyTeam. Визиты, CLM, KPI и бонусы медпредставителей — MyTeam Plus. 14 дней бесплатно." />
+    <meta name="keywords" content="контроль сотрудников, GPS трекинг, учет рабочего времени, табель, прослушивание, KPI, CRM для фармацевтики, медпредставители, CLM, xodimlar nazorati, GPS kuzatuv, davomat, farma CRM" />
     <meta name="robots" content="index, follow" />
     <meta name="application-name" content="MyTeam" />
     <link rel="canonical" href="https://my-team.uz/" />
@@ -20,17 +20,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MyTeam" />
     <meta property="og:url" content="https://my-team.uz/" />
-    <meta property="og:title" content="MyTeam — xodimlaringiz qayerda va nima qilyapti: taxmin emas, fakt" />
-    <meta property="og:description" content="Dala xodimlari nazorati va farmatsevtika CRM'i: jonli xarita, davomat, soxta GPS'dan himoya, jonli tinglash, vizitlar va KPI. 14 kun bepul sinov." />
+    <meta property="og:title" content="MyTeam — где ваши сотрудники и что они делают: не догадки, а факты" />
+    <meta property="og:description" content="Контроль полевых сотрудников и CRM для фармацевтики: живая карта, табель, защита от Fake GPS, прослушивание, визиты и KPI. 14 дней бесплатно." />
     <meta property="og:image" content="https://my-team.uz/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="MyTeam — xodimlaringiz qayerda va nima qilyapti: taxmin emas, fakt" />
-    <meta property="og:locale" content="uz_UZ" />
-    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:image:alt" content="MyTeam — где ваши сотрудники и что они делают: не догадки, а факты" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="uz_UZ" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyTeam — xodimlar nazorati va farma CRM" />
-    <meta name="twitter:description" content="Jonli xarita, davomat, soxta GPS'dan himoya, jonli tinglash, vizitlar va KPI. 14 kun bepul." />
+    <meta name="twitter:title" content="MyTeam — контроль сотрудников и фарм CRM" />
+    <meta name="twitter:description" content="Живая карта, табель, защита от Fake GPS, прослушивание, визиты и KPI. 14 дней бесплатно." />
     <meta name="twitter:image" content="https://my-team.uz/og-image.png" />
 
     <!-- Qidiruv tizimlari uchun: kompaniya va ikki mahsulot. Narxlar src/lib/pricing.js bilan bir xil bo'lsin -->
@@ -48,15 +48,15 @@
             "telephone": "+998955209595",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Shota Rustaveli ko'chasi, 150",
-              "addressLocality": "Toshkent",
+              "streetAddress": "ул. Шота Руставели, 150",
+              "addressLocality": "Ташкент",
               "addressCountry": "UZ"
             },
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+998955209595",
               "contactType": "sales",
-              "availableLanguage": ["uz", "ru"]
+              "availableLanguage": ["ru", "uz"]
             }
           },
           {
@@ -65,14 +65,14 @@
             "url": "https://my-team.uz/#products",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Android, Web",
-            "description": "Xodimlar nazorati: ishni boshlash va yakunlash, jonli xarita va marshrut, avtomatik davomat, ish vaqtida jonli tinglash, ish jadvallari, ta'tillar, KPI va HR ko'rsatkichlari.",
+            "description": "Контроль сотрудников: начало и завершение работы, живая карта и маршрут, автоматический табель, прослушивание в рабочее время, графики работы, отпуска, KPI и HR-показатели.",
             "publisher": { "@id": "https://my-team.uz/#organization" },
             "offers": {
               "@type": "AggregateOffer",
               "priceCurrency": "UZS",
               "lowPrice": "139000",
               "highPrice": "199000",
-              "description": "Bir xodim uchun oyiga, QQSsiz. 14 kun bepul sinov."
+              "description": "За одного сотрудника в месяц, без НДС. 14 дней бесплатно."
             }
           },
           {
@@ -81,14 +81,14 @@
             "url": "https://my-team.uz/#products",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Android, Web",
-            "description": "Farmatsevtika kompaniyalari uchun CRM: tibbiy vakillar vizitlari, oylik vizit rejasi, CLM taqdimot, shifokor kartasi, namunalar ombori, distribyutor savdosi, KPI va bonus.",
+            "description": "CRM для фармацевтических компаний: визиты медпредставителей, план визитов на месяц, CLM-презентации, карточка врача, склад образцов, продажи дистрибьюторов, KPI и бонусы.",
             "publisher": { "@id": "https://my-team.uz/#organization" },
             "offers": {
               "@type": "AggregateOffer",
               "priceCurrency": "UZS",
               "lowPrice": "139000",
               "highPrice": "199000",
-              "description": "Bir tibbiy vakil uchun oyiga, QQSsiz. 14 kun bepul sinov."
+              "description": "За одного медпредставителя в месяц, без НДС. 14 дней бесплатно."
             }
           }
         ]
@@ -103,7 +103,7 @@
     <script>
       try {
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-        if (localStorage.getItem('lang') === 'ru') document.documentElement.lang = 'ru';
+        if (localStorage.getItem('lang') === 'uz') document.documentElement.lang = 'uz';
       } catch (e) { /* xotira yopiq bo'lishi mumkin */ }
     </script>
   </head>
@@ -113,11 +113,11 @@
     <!-- JavaScript o'chiq bo'lsa ham asosiy ma'lumot va aloqa ko'rinsin -->
     <noscript>
       <div style="max-width: 640px; margin: 48px auto; padding: 0 16px; font-family: system-ui, sans-serif; line-height: 1.5; color: #0b1630;">
-        <h1>MyTeam — xodimlar nazorati va farma CRM</h1>
-        <p><b>MyTeam</b>: ishni boshlash va yakunlash, jonli xarita, avtomatik davomat, ish vaqtida jonli tinglash, KPI va HR ko'rsatkichlari.</p>
-        <p><b>MyTeam Plus</b>: farmatsevtika kompaniyalari uchun CRM — vizitlar, CLM taqdimot, namunalar, distribyutor savdosi, KPI va bonus.</p>
-        <p>14 kun bepul sinov. Aloqa: <a href="tel:+998955209595">+998 95 520 95 95</a>, <a href="mailto:mehrzodgroup@gmail.com">mehrzodgroup@gmail.com</a></p>
-        <p>Saytning to'liq ko'rinishi uchun brauzeringizda JavaScript'ni yoqing.</p>
+        <h1>MyTeam — контроль сотрудников и фарм CRM</h1>
+        <p><b>MyTeam</b>: начало и завершение работы, живая карта, автоматический табель, прослушивание в рабочее время, KPI и HR-показатели.</p>
+        <p><b>MyTeam Plus</b>: CRM для фармацевтических компаний — визиты, CLM-презентации, образцы, продажи дистрибьюторов, KPI и бонусы.</p>
+        <p>14 дней бесплатно. Контакты: <a href="tel:+998955209595">+998 95 520 95 95</a>, <a href="mailto:mehrzodgroup@gmail.com">mehrzodgroup@gmail.com</a></p>
+        <p>Чтобы увидеть сайт полностью, включите JavaScript в браузере.</p>
       </div>
     </noscript>
 

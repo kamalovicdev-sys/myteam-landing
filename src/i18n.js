@@ -5,7 +5,9 @@ import ru from './locales/ru';
 
 const SUPPORTED = ['uz', 'ru'];
 
-// Tanlangan til xotirada; bo'lmasa brauzer tili ruscha bo'lsa — ru, aks holda o'zbekcha
+const DEFAULT_LANGUAGE = 'ru';
+
+// Tanlangan til xotirada; tanlanmagan bo'lsa — ruscha (index.html ham ruscha)
 function initialLanguage() {
   try {
     const saved = localStorage.getItem('lang');
@@ -13,7 +15,7 @@ function initialLanguage() {
   } catch {
     // xotira yopiq bo'lishi mumkin (maxfiy oyna)
   }
-  return navigator.language?.toLowerCase().startsWith('ru') ? 'ru' : 'uz';
+  return DEFAULT_LANGUAGE;
 }
 
 i18n
@@ -24,7 +26,7 @@ i18n
       ru: { translation: ru },
     },
     lng: initialLanguage(),
-    fallbackLng: 'uz',
+    fallbackLng: DEFAULT_LANGUAGE,
     interpolation: {
       escapeValue: false
     }
